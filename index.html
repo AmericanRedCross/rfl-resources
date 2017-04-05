@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" rel="stylesheet">
 <style>
-
-    * {font-family: 'PT Sans', sans-serif;}
-    .counties {
-      fill: none;
+    *, h2, h4 {font-family: 'PT Sans', sans-serif;}
+    h2 {font-size: 20px;}
+    h4 {font-size: 15px;}
+        
+    #container {
+        height:100%;
+        top:-70px;
+        position: relative;
+        
     }
-
-    .states {
-      fill: none;
-      stroke: #fff;
-      stroke-linejoin: round;
+    
+    #header {
+        position: relative;
+        margin-right:10px;
+        text-align:right;
+        line-height: 4px;
     }
-
+    
     #info {
         position: relative;
-        top:-70px;
+        top:-85px;
         left: 100px;
-        width:165px;
+        width:350px;
         height:110px;
-        background-color: rgba(199,199,200,0.2);
         border-radius:1px;
-        border-color: rgba(57,57,57,0.2);
-        border-style: solid;
-        border-width: 1px;
         text-align: left;
         padding-left:10px;
         margin-top:30px;
            
     }
+    
     #imgs div {
         display: inline-block;
         margin-top:-10px;
@@ -41,95 +45,160 @@
         -webkit-filter: drop-shadow(1px 1px 1px rgba(57,57,57,.5));
         filter: drop-shadow(1px 1px 1px rgba(57,57,57,.5));
     }
-    #img div p {
-        color:aliceblue;
+    #imgs p {
+        margin-left:10px;
+        margin-top:10px;
     }
-    #header {
-        position: relative;
-        text-align:right;
-        right:100px;
-        line-height: 4px;
+    #rflDescription img {
+        width: 50px;
     }
-    #container {
-        top:-70px;
-        position: relative;
-        
+    .region {
+        stroke: #fff;
+        stroke-width:1.3px;
+    }
+    .activeState {
+        stroke: rgba(0,0,0,1);
+        stroke-width: 2px;
     }
 </style>
-
 <body>
     <div id="canvas">
-        <div id="header">
-            <h2>
-                Restoring Family Links Casework and Resources
-            </h2>
-            <h4>March 2017</h4>
-        </div>
+        <div id="header"></div>
         <div id="info"></div>
         <div id="container"></div>
     </div> 
     <div id="rflDescription">
-    <!--use foundations for accordion with info about each of the project types-->
+        <ul class="tabs" data-active-collapse="true" data-tabs id="collapsing-tabs">
+          <li class="tabs-title"><a href="#panel1c" aria-selected="true">Outreach Grant</a></li>
+          <li class="tabs-title"><a href="#panel2c">Instructor</a></li>
+          <li class="tabs-title"><a href="#panel3c">Mentor</a></li>
+          <li class="tabs-title"><a href="#panel4c">Phone Project</a></li>
+        </ul>
+        <div class="tabs-content" data-tabs-content="collapsing-tabs">
+          <div class="tabs-panel" id="panel1c">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><img src='img/grantProj.png'/>
+          </div>
+          <div class="tabs-panel" id="panel2c">
+            <p>Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p><img src='img/instructorspng.png'/>
+          </div>
+          <div class="tabs-panel" id="panel3c">
+            <img class="thumbnail" src="assets/img/generic/rectangle-3.jpg"><img src='img/mentor.png'/>
+          </div>
+          <div class="tabs-panel" id="panel4c">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><img src='img/phonProj.png'/>
+          </div>
+        </div>    
+
     </div>
+
 </body>
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-composite-projections/1.0.1/d3-composite-projections.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.2.0/papaparse.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js"></script>
+<script>scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"</script>
 <script>
-    //rcRegion = Papa.parse('rcRegion.csv',{delimiter:",",header:true})
-    //function filterRegions(rcode,rcRegion) {
-    //    console.log(rcRegion)
-    //}
-    function buildMap() {
-        var width = 960,
-        height = 500;
-    var projection = d3.geoAlbersUsaTerritories();
-    // get the geoPath
-    var path = d3.geoPath().projection(projection);
-    var svg = d3.select("#container")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height);
-    var t = d3.transition();
-    var defaultInfo = '<p>Region: </p>'
-    d3.select('#info')
-        .html(defaultInfo);
-    d3.json('rcRegion.json',function(error,rc){
-        // get geometry out of topojson
-        var rc = topojson.feature(rc, rc.objects.rcRegion);
-        svg.selectAll(".region")
-            .data(rc.features)
-            .enter()
-            .append("path")
-            .attr('class','region')
-            .attr('d',path)
-            .style("fill",function(d){
-                if(d.properties.RCODE == "01R04")
-                    return "rgba(255,0,0,1)"
-                else 
-                    return "rgba(199,199,200,1)"
-            })
-            .style("stroke","#000")
-            .style("stroke-width","1.3px")
-            .style("stroke","#fff")
-            
-            .on("mouseover", function(d) {
-                d3.select('#info')
-                    .html('<p>Region: ' + d.properties.RCODE + '</p><div id="imgs"><div><img src="instructorspng.png"/><p>2</p></div><div><img src="grantProj.png"/><p>2</p></div><div><img src="mentor.png"/><p>2</p></div><div><img id="phone" src="phonProj.png"/><p>2</p></div></div>');
-            })
-            .on("mouseout",function() {
-                d3.select('#info')
-                    .html(defaultInfo);
-            });
-
+    // set current date
+    function setDate () {
+        var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')
+        var today = new Date()
+        var month = months[today.getMonth()]
+        var year = today.getFullYear()
+        var current = '<h4>' + month + ' ' + year + '</h4>'
+        d3.select('#header').html('<h2>Restoring Family Links Casework and Resources</h2>' + current)
+    }
+    // get program/resource data as of objects w/RCODE as key
+    function rflData() {
+        d3.csv('data/rcRegion.csv', function(data) {
+            regionData = d3.map(data, function(d){return d.RCODE})
         })
     }
-    buildMap()
+    // draw rflMap, use hover to show program/resource info about each region
+    function rflMap() {
+        var width = 960,
+            height = 500;
+        d3.select("#canvas").attr("width", width).attr("height", height);
+        d3.select("#container").attr("width", width).attr("height", height);
+        var projection = d3.geoAlbersUsaTerritories();
+        // get the geoPath
+        var path = d3.geoPath().projection(projection);
+        var svg = d3.select("#container")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+        var t = d3.transition();
+        var defaultInfo = '<p>Region: Hover over a region</p>'
+        d3.select('#info')
+            .html(defaultInfo);
+        d3.json('data/rcRegion.json',function(error,rc){
+            // get geometry out of topojson
+            var rc = topojson.feature(rc, rc.objects.rcRegion);
+            svg.selectAll(".region")
+                .data(rc.features)
+                .enter()
+                .append("path")
+                .attr('class','region')
+                .attr('d',path)
+                .style("fill",function(d){
+                    regionRank = regionData["$"+d.properties.RCODE].top20
+                    if(0 < regionRank && regionRank <= 10) {
+                        return "rgba(212,49,52,1)"
+                    } else if (10 < regionRank && regionRank <= 20) {
+                        return "rgba(241,132,106,1)"
+                    } else {
+                        return "rgba(200,199,199,1)"
+                    }
+
+                })
+                .on("mouseover", function(d) {
+                    d3.select(this).classed('activeState',true)
+                    rcRegion = regionData["$"+d.properties.RCODE]
+                    var region = rcRegion.Region
+                    var imgs;
+                    function filterPrograms() {
+                        myHTMLstring = ""
+//                        if(rcRegion.instructor > 0 ) {
+//                            
+//                        }
+                        if(rcRegion.programs == 'imop') {
+                            imgs = '<div><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div><div><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div><div><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div><div><img id="phone" src="img/phonProj.png"/><p>' + rcRegion.phone + '</p></div>'
+                        } else if (rcRegion.programs == 'imo'){
+                            imgs = '<div><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div><div><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div><div><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div>'
+                        } else if (rcRegion.programs == 'iop'){
+                            imgs = '<div><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div><div><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div><div><img src="img/phonProj.png"/><p>' + rcRegion.phone + '</p></div>'
+                        } else if (rcRegion.programs == 'im'){
+                            imgs = '<div><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div><div><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div>'
+                        } else if (rcRegion.programs == 'io'){
+                            imgs = '<div><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div><div><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div>'
+                        } else if (rcRegion.programs == 'mo'){
+                            imgs = '<div><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div><div><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div>'
+                        } else if (rcRegion.programs == 'i'){
+                            imgs = '<div><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div>'
+                        } else if (rcRegion.programs == 'm'){
+                            imgs = '<div><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div>'
+                        } else if (rcRegion.programs == 'o'){
+                            imgs = '<div><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div>'
+                        } else if (rcRegion.programs == 'p'){
+                            imgs = '<div><img id="phone" src="img/phonProj.png"/><p>' + rcRegion.phone + '</p></div>'
+                        } else {
+                            imgs = '<div><p>This region does not have any casework</p></div>'       
+                        }
+                    }  
+                    filterPrograms()
+                    d3.select('#info')
+                        .html('<p>Region: ' + region + '</p><div id="imgs">' + imgs + '</div>');
+                })
+                .on("mouseout",function() {
+                    d3.select(this).classed('activeState',false)
+                    d3.select('#info')
+                        .html(defaultInfo);
+                });
+            })
+    }
     
-    
-    
-    
+    var regionData = rflData()
+    setDate()
+    rflMap()
+    //Foundation.reInit(['tabs']);
 </script>
 </html>
