@@ -4,92 +4,151 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" rel="stylesheet">
 <style>
     *, h2, h4 {font-family: 'PT Sans', sans-serif;}
-    h2 {font-size: 20px;}
-    h4 {font-size: 15px;}
-        
-    #container {
-        height:100%;
-        top:-70px;
-        position: relative;
-        
+    h2 {font-size:18px;}
+    #main {
+        border-bottom: solid rgba(57,57,57,1);
+        border-bottom-width: 2px;
+        height:75vh;
     }
-    
+    #sidebar {
+        border-right: solid rgba(57,57,57,1);
+        border-right-width: 2px;
+        border-bottom: solid rgba(57,57,57,1);
+        border-bottom-width: 2px;
+        background-color: rgba(234,234,234,1);
+        height:75vh;
+    }
     #header {
-        position: relative;
-        margin-right:10px;
-        text-align:right;
+        border-bottom: solid rgba(57,57,57,1);
+        border-bottom-width: 1px;
+        margin-top:15px;
+        margin-bottom:15px;
+        text-align: left;
         line-height: 4px;
     }
-    
     #info {
-        position: relative;
-        top:-85px;
-        left: 100px;
-        width:350px;
-        height:110px;
-        border-radius:1px;
-        text-align: left;
-        padding-left:10px;
         margin-top:30px;
-           
     }
-    
+    #regionText {
+        text-align: center
+    }
+    #imgs {
+        margin-top:50px;
+    }
     #imgs div {
-        display: inline-block;
         margin-top:-10px;
+        text-align: center;
     }
     #imgs div img{
+        display:inline-block;
         margin-right:10px;
         margin-bottom: -10px;
-        width:30px;
-        -webkit-filter: drop-shadow(1px 1px 1px rgba(57,57,57,.5));
-        filter: drop-shadow(1px 1px 1px rgba(57,57,57,.5));
+        width:70px;
+        -webkit-filter: drop-shadow(3px 3px 3px rgba(57,57,57,.5));
+        filter: drop-shadow(3px 3px 3px rgba(57,57,57,.5));
     }
     #imgs p {
-        margin-left:10px;
-        margin-top:10px;
+        color: white;
+        position: relative;
+        left: 20px;
+        bottom:15px;
     }
     #rflDescription img {
         width: 50px;
+    }
+    .card {
+        margin-top: 1px;
+        border: none !important;
+    }
+    .card-divider {
+        margin-top: 10px;
+        border-radius: 2px;
+        background-color: rgba(234,234,234,0);
+        text-align: center;
+    }
+    .card-divider img {
+        -webkit-filter: drop-shadow(3px 3px 3px rgba(57,57,57,.5));
+        filter: drop-shadow(3px 3px 3px rgba(57,57,57,.5));
+    }
+    .card-section {
+        border-top: solid rgba(57,57,57,0.5);
+        border-top-width: 2px; 
     }
     .region {
         stroke: #fff;
         stroke-width:1.3px;
     }
     .activeState {
-        stroke: rgba(0,0,0,1);
-        stroke-width: 2px;
+        stroke: rgba(57,57,57,1);
+        stroke-width:2px;
     }
 </style>
 <body>
-    <div id="canvas">
-        <div id="header"></div>
-        <div id="info"></div>
-        <div id="container"></div>
-    </div> 
-    <div id="rflDescription">
-        <ul class="tabs" data-active-collapse="true" data-tabs id="collapsing-tabs">
-          <li class="tabs-title"><a href="#panel1c" aria-selected="true">Outreach Grant</a></li>
-          <li class="tabs-title"><a href="#panel2c">Instructor</a></li>
-          <li class="tabs-title"><a href="#panel3c">Mentor</a></li>
-          <li class="tabs-title"><a href="#panel4c">Phone Project</a></li>
-        </ul>
-        <div class="tabs-content" data-tabs-content="collapsing-tabs">
-          <div class="tabs-panel" id="panel1c">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><img src='img/grantProj.png'/>
-          </div>
-          <div class="tabs-panel" id="panel2c">
-            <p>Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p><img src='img/instructorspng.png'/>
-          </div>
-          <div class="tabs-panel" id="panel3c">
-            <img class="thumbnail" src="assets/img/generic/rectangle-3.jpg"><img src='img/mentor.png'/>
-          </div>
-          <div class="tabs-panel" id="panel4c">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><img src='img/phonProj.png'/>
-          </div>
-        </div>    
-
+    <div id="main" class="row">
+        <div class="small-3 columns" id="sidebar">
+            <div id="header">
+                <h2><b>Restoring Family Links: </b><br/>Casework and Resources</h2>
+            </div>
+            <div id="info"></div>
+        </div>
+        <div class="small-9 columns" id="canvas">
+            <div class="row">
+                <div class="small-12 columns" id="container"></div>
+            </div>
+        </div> 
     </div>
+    <div class="row">
+        <div class="small-12 columns" id="rflDescription">
+            <div class="row small-up-4">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-divider">
+                            <h4>Instructor</h4>
+                            <img src="img/instructorspng.png">
+                        </div>
+                        <div class="card-section">
+                            <p>Instructors are trained by National Headquarters and certified to teach the RFL caseworker course throughout their region.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <div class="card-divider">
+                            <h4>Mentors</h4>
+                            <img src="img/mentor.png">
+                        </div>
+                        <div class="card-section">
+                            <p>Mentors have significant and notable experience in Restoring Family Links.  They act as advisers to national headquarters and other regions on casework, outreach and training </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                    <div class="card-divider">
+                        <h4>Outreach Grants</h4>
+                        <img src="img/grantProj.png">
+                    </div>
+                    <div class="card-section">
+                        <p>Outreach Grants or financial awards are provided by national headquarters for regions to host outreach or training events throughout the chapter network.</p>
+                    </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <div class="card-divider">
+                            <h4>Phone Project</h4>
+                            <img src="img/phonProj.png">
+                        </div>
+                        <div class="card-section">
+                            <p>Phone projects are located in regions that have partners with local agencies serving refugee and migrant populations to reconnect family members by providing phone calls to those in need.</p>
+                        </div>
+                    </div>
+                </div>        
+            </div>
+        </div>
+    </div>
+    
+    
 
 </body>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -105,7 +164,7 @@
         var month = months[today.getMonth()]
         var year = today.getFullYear()
         var current = '<h4>' + month + ' ' + year + '</h4>'
-        d3.select('#header').html('<h2>Restoring Family Links Casework and Resources</h2>' + current)
+        d3.select('#surf').html(current)
     }
     // get program/resource data as of objects w/RCODE as key
     function rflData() {
@@ -127,7 +186,7 @@
             .attr("width", width)
             .attr("height", height);
         var t = d3.transition();
-        var defaultInfo = '<p>Region: Hover over a region</p>'
+        var defaultInfo = '<p id="regionText">Hover over a region to see its resources</p>'
         d3.select('#info')
             .html(defaultInfo);
         d3.json('data/rcRegion.json',function(error,rc){
@@ -152,6 +211,7 @@
                 })
                 .on("mouseover", function(d) {
                     d3.select(this).classed('activeState',true)
+                    this.parentElement.appendChild(this);
                     rcRegion = regionData["$"+d.properties.RCODE]
                     var region = rcRegion.Region
                     var imgs;
@@ -161,11 +221,11 @@
 //                            
 //                        }
                         if(rcRegion.programs == 'imop') {
-                            imgs = '<div><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div><div><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div><div><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div><div><img id="phone" src="img/phonProj.png"/><p>' + rcRegion.phone + '</p></div>'
+                            imgs = '<div><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div><div><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div><div><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div><div><img id="phone" src="img/phonProj.png"/></div>'
                         } else if (rcRegion.programs == 'imo'){
                             imgs = '<div><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div><div><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div><div><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div>'
                         } else if (rcRegion.programs == 'iop'){
-                            imgs = '<div><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div><div><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div><div><img src="img/phonProj.png"/><p>' + rcRegion.phone + '</p></div>'
+                            imgs = '<div><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div><div><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div><div><img src="img/phonProj.png"/></div>'
                         } else if (rcRegion.programs == 'im'){
                             imgs = '<div><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div><div><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div>'
                         } else if (rcRegion.programs == 'io'){
@@ -179,21 +239,23 @@
                         } else if (rcRegion.programs == 'o'){
                             imgs = '<div><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div>'
                         } else if (rcRegion.programs == 'p'){
-                            imgs = '<div><img id="phone" src="img/phonProj.png"/><p>' + rcRegion.phone + '</p></div>'
+                            imgs = '<div><img id="phone" src="img/phonProj.png"/></div>'
                         } else {
-                            imgs = '<div><p>This region does not have any casework</p></div>'       
+                            imgs = '<div><p style="color:black">No RFL Programs</p></div>'       
                         }
                     }  
                     filterPrograms()
                     d3.select('#info')
-                        .html('<p>Region: ' + region + '</p><div id="imgs">' + imgs + '</div>');
+                        .html('<p id="regionText">' + region + '</p><div id="imgs">' + imgs + '</div>');
                 })
                 .on("mouseout",function() {
                     d3.select(this).classed('activeState',false)
                     d3.select('#info')
                         .html(defaultInfo);
                 });
+            
             })
+        
     }
     
     var regionData = rflData()
