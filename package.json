@@ -1,0 +1,14 @@
+{
+  "name": "rfl-viz",
+  "version": "0.0.1",
+  "description": "viz for rfl",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "max grossman",
+  "license": "ISC",
+  "dependencies": {
+    "d3": "^4.7.4"
+  }
+}

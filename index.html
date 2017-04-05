@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<style>
+
+    * {font-family: 'PT Sans', sans-serif;}
+    .counties {
+      fill: none;
+    }
+
+    .states {
+      fill: none;
+      stroke: #fff;
+      stroke-linejoin: round;
+    }
+
+    #info {
+        position: relative;
+        top:-70px;
+        left: 100px;
+        width:165px;
+        height:110px;
+        background-color: rgba(199,199,200,0.2);
+        border-radius:1px;
+        border-color: rgba(57,57,57,0.2);
+        border-style: solid;
+        border-width: 1px;
+        text-align: left;
+        padding-left:10px;
+        margin-top:30px;
+           
+    }
+    #imgs div {
+        display: inline-block;
+        margin-top:-10px;
+    }
+    #imgs div img{
+        margin-right:10px;
+        margin-bottom: -10px;
+        width:30px;
+        -webkit-filter: drop-shadow(1px 1px 1px rgba(57,57,57,.5));
+        filter: drop-shadow(1px 1px 1px rgba(57,57,57,.5));
+    }
+    #img div p {
+        color:aliceblue;
+    }
+    #header {
+        position: relative;
+        text-align:right;
+        right:100px;
+        line-height: 4px;
+    }
+    #container {
+        top:-70px;
+        position: relative;
+        
+    }
+</style>
+
+<body>
+    <div id="canvas">
+        <div id="header">
+            <h2>
+                Restoring Family Links Casework and Resources
+            </h2>
+            <h4>March 2017</h4>
+        </div>
+        <div id="info"></div>
+        <div id="container"></div>
+    </div> 
+    <div id="rflDescription">
+    <!--use foundations for accordion with info about each of the project types-->
+    </div>
+</body>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-composite-projections/1.0.1/d3-composite-projections.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.2.0/papaparse.js"></script>
+<script>
+    //rcRegion = Papa.parse('rcRegion.csv',{delimiter:",",header:true})
+    //function filterRegions(rcode,rcRegion) {
+    //    console.log(rcRegion)
+    //}
+    function buildMap() {
+        var width = 960,
+        height = 500;
+    var projection = d3.geoAlbersUsaTerritories();
+    // get the geoPath
+    var path = d3.geoPath().projection(projection);
+    var svg = d3.select("#container")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+    var t = d3.transition();
+    var defaultInfo = '<p>Region: </p>'
+    d3.select('#info')
+        .html(defaultInfo);
+    d3.json('rcRegion.json',function(error,rc){
+        // get geometry out of topojson
+        var rc = topojson.feature(rc, rc.objects.rcRegion);
+        svg.selectAll(".region")
+            .data(rc.features)
+            .enter()
+            .append("path")
+            .attr('class','region')
+            .attr('d',path)
+            .style("fill",function(d){
+                if(d.properties.RCODE == "01R04")
+                    return "rgba(255,0,0,1)"
+                else 
+                    return "rgba(199,199,200,1)"
+            })
+            .style("stroke","#000")
+            .style("stroke-width","1.3px")
+            .style("stroke","#fff")
+            
+            .on("mouseover", function(d) {
+                d3.select('#info')
+                    .html('<p>Region: ' + d.properties.RCODE + '</p><div id="imgs"><div><img src="instructorspng.png"/><p>2</p></div><div><img src="grantProj.png"/><p>2</p></div><div><img src="mentor.png"/><p>2</p></div><div><img id="phone" src="phonProj.png"/><p>2</p></div></div>');
+            })
+            .on("mouseout",function() {
+                d3.select('#info')
+                    .html(defaultInfo);
+            });
+
+        })
+    }
+    buildMap()
+    
+    
+    
+    
+</script>
+</html>
