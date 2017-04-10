@@ -32,7 +32,6 @@ h2 {
 }
 #instructions p {
     font-size:14px;
-    line-height: 0.5em;
 }
 .accordion {
     margin-top:10%;
@@ -91,6 +90,14 @@ h2 {
   .accordion p {
     text-align:left;
     margin: 0 20px 0 20px;
+  }
+}
+@media (max-width: 1091px) {
+  .accordion h4 {
+    margin-left: 5px;
+  }
+  .accordion img {
+    width:40px;
   }
 }
 .accordion-item:hover h4 {

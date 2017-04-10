@@ -130,6 +130,9 @@ $(document).ready(function () {
 });
 $(window).on('resize', function(){
   if($(this).width() < 1216) {
-    sizeChange()
+    setTimeout(function() {
+      sizeChange()
+    }, 300)
+
   }
 })
