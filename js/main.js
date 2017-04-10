@@ -20,9 +20,11 @@ function rflMap() {
     var projection = d3.geoAlbersUsaTerritories();
     // get the geoPath
     var path = d3.geoPath().projection(projection);
-    var svg = d3.select("#container").append("svg")
-        .attr("width", width)
-        .attr("height", height);
+    var svg = d3.select("#container")
+              .append("svg")
+              .attr("width", width)
+              .attr("height", height)
+              .append("g");
     var t = d3.transition();
     var defaultInfo = '<p id="hoverText">Hover over a region to see its resources</p>'
     var Tooldiv = d3.select("#canvas").append("div")
@@ -114,12 +116,20 @@ function rflMap() {
             .attr("d",projection.getCompositionBorders())
 
     }
+    function sizeChange() {
+	    d3.select("g").attr("transform", "scale(" + $("#container").width()/900 + ")");
+	    $("svg").height($("#container").width()*0.618);
+	   }
 
+// load map
 $(document).ready(function () {
     $(document).foundation();
     var regionData = rflData()
     rflMap()
     Foundation.reInit('accordion');
 });
-
-//Foundation.reInit(['tabs']);
+$(window).on('resize', function(){
+  if($(this).width() < 1216) {
+    sizeChange()
+  }
+})

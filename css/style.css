@@ -3,11 +3,20 @@ body {
         padding: 0px;
         height: 100%;
     }
-*, h2, h4 {font-family: 'PT Sans', sans-serif;}
-h2 {font-size:18px;}
+*, h2, h4 {
+  font-family: 'PT Sans', sans-serif;
+}
+h2 {
+  font-size:18px;
+}
 #viz {
-    margin: 10px 100px;
+    margin: auto;
     max-width:1200px;
+}
+@media(max-width:1250px) {
+  #viz {
+    margin: 0 30px;
+  }
 }
 #header {
         border-bottom: solid rgba(57,57,57,1);
@@ -18,7 +27,6 @@ h2 {font-size:18px;}
         line-height: 4px;
 
 }
-
 #instructions {
     margin-left: 15px;
 }
@@ -57,9 +65,24 @@ h2 {font-size:18px;}
     color: rgba(57,57,57,1);
 }
 @media (max-width: 1023px) {
+  .accordion {
+    margin: auto;
+  }
+  .accordion img {
+    min-width:40px
+  }
+  .accordion-item {
+    vertical-align: top;
+    display: inline-block;
+  }
   .accordion-item,
   .accordion-item-is-active {
     text-align: center;
+    width:20%;
+    margin: 0 5px;
+  }
+  .accordion-content {
+    margin: 10px -50px;
   }
   .accordion h4 {
     display: block;
@@ -129,8 +152,3 @@ h2 {font-size:18px;}
         stroke: rgba(57,57,57,1);
         stroke-width:2px;
     }
-.svg-container {
-    margin:auto;
-    display: block;
-    position: relative;
-}
