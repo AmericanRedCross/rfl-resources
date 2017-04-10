@@ -115,6 +115,38 @@ function rflMap() {
             .style("stroke-dasharray","5,5")
             .attr("d",projection.getCompositionBorders())
 
+            var legend = svg.selectAll('.legend')
+                    .data(['Top 10 (1-10)','Top 20 (11-20)','Outside Top 20']).enter()
+                    .append('g')
+                    .attr('class','legend')
+                    .attr('transform',function(d,i){
+                      var vert = i * 18;
+                      return 'translate(' + ($('#container').width() - 100) + ','
+                      + (350 + vert) + ')'
+                    });
+
+            legend.append('rect')
+                    .attr('width',18)
+                    .attr('height',18)
+                    .style('fill',function(d){
+                      if(d=='Top 10 (1-10)'){return "rgba(212,49,52,1)"}
+                      else if(d=='Top 20 (11-20)') {return "rgba(241,132,106,1)"}
+                      else if(d=='Outside Top 20'){return "rgba(200,199,199,1)"}
+                    })
+
+            legend.append('text')
+                  .attr("x", 22)
+                  .attr('y', 14)
+                  .attr("font-size","14px")
+                  .text(function(d) { return d })
+
+            svg.append('text')
+              .attr('x',  ($('#container').width() - 100))
+              .attr('y', 340)
+              .attr('font-size','14px')
+              .attr('font-weight','bold')
+              .text('Regions by RFL Casework')
+
     }
     function sizeChange() {
 	    d3.select("g").attr("transform", "scale(" + $("#container").width()/900 + ")");
