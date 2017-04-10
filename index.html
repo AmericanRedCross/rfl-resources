@@ -1,83 +1,62 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" integrity="sha256-itWEYdFWzZPBG78bJOOiQIn06QCgN/F0wMDcC4nOhxY=" crossorigin="anonymous" />
 <link href="css/style.css" rel="stylesheet">
 <body>
-    <div id="main" class="row">
-        <div class="small-3 columns" id="sidebar">
-                <div id="header">
-                    <div class="row">
-                        <div class="small-12 columns">
-                             <h2><b>Restoring Family Links: </b><br/>Casework and Resources</h2>
-                        </div>
-                    </div>
-                </div>
-           
-                <div class="small-12 columns" id="info"></div>
-            
-        </div>
-        <div class="small-9 columns" id="canvas">
-            <div class="small-12 columns" id="container">
-                <img src="img/amcross.png"/>
+    <div id="viz">
+        <div id="header">
+            <div class="row">
+                <h2><b>Restoring Family Links: </b><br/>Casework and Resources</h2>
             </div>
-        </div> 
-    </div>
-    <div class="row">
-        <div class="small-12 columns" id="rflDescription">
-            <div class="row small-up-4">
-                <div class="column">
-                    <div class="card">
-                        <div class="card-divider">
-                            <h4>Instructor</h4>
-                            <img src="img/instructorspng.png">
-                        </div>
-                        <div class="card-section">
+        </div>
+        <div id="main" class="row">
+            <div id="instructions">
+                <p>Click a resource below to learn more.</p>
+                <p>Hover over regions on the map to see how many of each resource it has</p>
+            </div>
+            <div class="large-3 columns" id="sidebar">
+                <ul class="accordion" data-accordion data-allow-all-closed="true">
+                    <li class="accordion-item" data-accordion-item>
+                        <a href="#instructor" class="accordion-title"><img src="img/instructorspng.png"><h4>Instructors</h4></a>
+                        <div class="accordion-content" data-tab-content>
                             <p>Instructors are trained by National Headquarters and certified to teach the RFL caseworker course throughout their region.</p>
                         </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-divider">
-                            <h4>Mentors</h4>
-                            <img src="img/mentor.png">
+                    </li>
+                    <li class="accordion-item" data-accordion-item>
+                        <a href="#mentor" class="accordion-title"><img src="img/mentor.png"><h4>Mentors</h4></a>
+                        <div class="accordion-content" data-tab-content>
+                          <p>Mentors have significant and notable experience in Restoring Family Links.  They act as advisers to national headquarters and other regions on casework, outreach and training </p>
                         </div>
-                        <div class="card-section">
-                            <p>Mentors have significant and notable experience in Restoring Family Links.  They act as advisers to national headquarters and other regions on casework, outreach and training </p>
+                    </li>
+                    <li class="accordion-item" data-accordion-item>
+                        <a href="#outreach" class="accordion-title"><img src="img/grantProj.png"><h4>Outreach Grants</h4></a>
+                        <div class="accordion-content" data-tab-content>
+                            <p>Instructors are trained by National Headquarters and certified to teach the RFL caseworker course throughout their region.</p>
                         </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                    <div class="card-divider">
-                        <h4>Outreach Grants</h4>
-                        <img src="img/grantProj.png">
-                    </div>
-                    <div class="card-section">
-                        <p>Outreach Grants or financial awards are provided by national headquarters for regions to host outreach or training events throughout the chapter network.</p>
-                    </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-divider">
-                            <h4>Phone Project</h4>
-                            <img src="img/phoneProj.png">
-                        </div>
-                        <div class="card-section">
+                    </li>
+                    <li class="accordion-item" data-accordion-item>
+                        <a href="#phone" class="accordion-title"><img src="img/phoneProj.png"><h4>Phone Project</h4></a>
+                        <div class="accordion-content" data-tab-content>
                             <p>Phone projects are located in regions that have partners with local agencies serving refugee and migrant populations to reconnect family members by providing phone calls to those in need.</p>
                         </div>
-                    </div>
-                </div>        
+                    </li>
+                </ul>
+            </div>
+            <div class="large-9 columns" id="canvas">
+                <div id="container"/>
             </div>
         </div>
     </div>
+
 </body>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-composite-projections/1.0.1/d3-composite-projections.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js"></script>
-<script>scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/plugins/foundation.accordion.min.js"></script>
 <script src="js/main.js"></script>
+<script></script>
 </html>

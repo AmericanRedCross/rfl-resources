@@ -15,19 +15,19 @@ function rflData() {
 }
 // draw rflMap, use hover to show program/resource info about each region
 function rflMap() {
+    var width = 960,
+        height = 500;
     var projection = d3.geoAlbersUsaTerritories();
     // get the geoPath
     var path = d3.geoPath().projection(projection);
-    var svg = d3.select("#container")
-        .classed("svg-container",true)
-        .append("svg")
-        .attr("preserveAspectRatio", "xMidYMid meet")
-        .attr("viewBox", "0 0 960 500")
-        .attr("width","100%")
-        .attr("height","100%")
-        .classed("svg-content-responsive", true); 
+    var svg = d3.select("#container").append("svg")
+        .attr("width", width)
+        .attr("height", height);
     var t = d3.transition();
     var defaultInfo = '<p id="hoverText">Hover over a region to see its resources</p>'
+    var Tooldiv = d3.select("#canvas").append("div")
+        .attr("id","tooltip")
+        .style("opacity", 0);
     d3.select('#info')
         .html(defaultInfo);
     d3.json('data/rcRegion.json',function(error,rc){
@@ -58,53 +58,68 @@ function rflMap() {
                 function filterPrograms() {
                 var programs = []
                 regionHTML = '<p id="regionText">' + region + '</p>'
-                // add to programs if region has them. 
+                // add to programs if region has them.
                 if(rcRegion.instructor > 0 ) {
                     programs.push(
-                        '<div class="column"><div class="card"><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div></div>'
+                        '<div class="imgInner"><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div>'
                     )
                 }
                 if(rcRegion.mentor > 0) {
                     programs.push(
-                        '<div class="column"><div class="card"><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div></div>'
+                        '<div class="imgInner"><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div>'
                     )
                 }
                 if(rcRegion.outreach > 0) {
                     programs.push(
-                        '<div class="column"><div class="card"><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div></div>'
+                        '<div class="imgInner"><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div>'
                     )
                 }
                 if(rcRegion.phone > 0) {
                     programs.push(
-                        '<div class="column"><div class="card"><img src="img/phoneProj.png"/></div></div>'
+                        '<div class="imgInner"><img src="img/phoneProj.png"/></div>'
                     )
                 }
                 // based on # of programs, set up cards.
                 if(programs.length > 0) {
-                    programs = programs.join('') 
-                    imgs = '<div id="imgs"><div class="row small-up-1">' + programs + '</div></div>'
-                    regionHTML += imgs
-                } 
-                else if(programs.length > 1)  {
                     programs = programs.join('')
-                    imgs = '<div id="imgs"><div class="row small-up-2">' + programs +      '</div></div>'
+                    imgs = '<div id="imgs">' + programs + '</div>'
                     regionHTML += imgs
                 } else {
-                    imgs = '<div id="imgs"><div class="row small-up-1"><p id="noResources">There are no resources in this region</p></div></div>'
+                    imgs = '<div><p id="noResources">There are no resources in this region</p></div>'
                     regionHTML += imgs
                 }
-                }  
+                }
                 filterPrograms()
-                d3.select('#info').html(regionHTML);
+                left = d3.event.pageX
+                right = d3.event.pageY
+                Tooldiv.transition()
+                    .duration(200)
+                    .style("opacity",0.9)
+                Tooldiv.html(regionHTML)
+                    .style("left", left + "px")
+                    .style("top", right  + "px")
+                //d3.select('#info').html(regionHTML);
             })
             .on("mouseout",function() {
                 d3.select(this).classed('activeState',false)
-                d3.select('#info').html(defaultInfo);
+                Tooldiv.transition()
+                    .duration(500)
+                    .style("opacity",0)
             });
         })
-        
+        svg.append("path")
+            .style("fill", 'none')
+            .style("stroke","rgba(57,57,57,.2)")
+            .style("stroke-dasharray","5,5")
+            .attr("d",projection.getCompositionBorders())
+
     }
 
-var regionData = rflData()
-rflMap()
+$(document).ready(function () {
+    $(document).foundation();
+    var regionData = rflData()
+    rflMap()
+    Foundation.reInit('accordion');
+});
+
 //Foundation.reInit(['tabs']);

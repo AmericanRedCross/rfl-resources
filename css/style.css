@@ -1,103 +1,136 @@
-   body {
+body {
         margin:0px;
         padding: 0px;
         height: 100%;
     }
-    *, h2, h4 {font-family: 'PT Sans', sans-serif;}
-    h2 {font-size:18px;}
-    #main {
-        border-bottom: solid rgba(57,57,57,1);
-        border-bottom-width: 2px;
-        height:80vh;
-    }
-    #canvas {
-        height:100%;
-        margin: auto;
-        position: relative;
-    }
-    #canvas img {
-        position:absolute;
-        right: 10px;
-        top: 10px;
-        width:50px;
-    }
-    #sidebar {
-        border-right: solid rgba(57,57,57,1);
-        border-right-width: 2px;
-        height:100%;
-        background-color: rgba(234,234,234,1);
-        position: relative;
-    }
-    #header {
+*, h2, h4 {font-family: 'PT Sans', sans-serif;}
+h2 {font-size:18px;}
+#viz {
+    margin: 10px 100px;
+    max-width:1200px;
+}
+#header {
         border-bottom: solid rgba(57,57,57,1);
         border-bottom-width: 1px;
-        margin-top:15px;
+        margin-top:10px;
         margin-bottom:15px;
         text-align: left;
         line-height: 4px;
-    }
-    #info {
-        margin-top:30px;
-    }
-    #hoverText{
-        font-size: 13px;
-        text-align: center
 
-    }
-    #regionText {
-        text-align: center
-    }
-    #imgs {
-        text-align: center;
+}
 
-    }
-    #imgs img {
-        width:65px;
-        -webkit-filter: drop-shadow(2px 2px 2px rgba(57,57,57,0.5));
-        filter: drop-shadow(2px 2px 2px rgba(57,57,57,0.5));
-    }
-    #imgs .card {
-        background-color: rgba(0,0,0,0);
-        border-color: rgba(0,0,0,0);
-        height:70px;
-    }
-    #imgs p {
+#instructions {
+    margin-left: 15px;
+}
+#instructions p {
+    font-size:14px;
+    line-height: 0.5em;
+}
+.accordion {
+    margin-top:10%;
+    width:90%;
+}
+.accordion-item {
+    text-align: left;
+}
+.accordion-item:hover a,
+.accordion-title:focus {
+    background-color: rgba(0,0,0,0) !important;
+}
+.accordion-item a{
+    border-color: rgba(0,0,0,0) !important;
+    color: rgba(0,0,0,0) !important;
+}
+.accordion-content{
+    border-color: rgba(0,0,0,0) !important;
+    border-top: solid rgba(57,57,57,0.75) 2px !important;
+}
+.accordion img {
+    width:50px;
+     -webkit-filter: drop-shadow(2px 2px 2px rgba(57,57,57,0.5));
+    filter: drop-shadow(2px 2px 2px rgba(57,57,57,0.5));
+}
+.accordion h4 {
+    margin-left:10px;
+    display:inline-block;
+    font-size:16px;
+    color: rgba(57,57,57,1);
+}
+@media (max-width: 1023px) {
+  .accordion-item,
+  .accordion-item-is-active {
+    text-align: center;
+  }
+  .accordion h4 {
+    display: block;
+    margin: 10px 0 0 0;
+  }
+  .accordion p {
+    text-align:left;
+    margin: 0 20px 0 20px;
+  }
+}
+.accordion-item:hover h4 {
+    color: rgba(80,80,80,1);
+     -webkit-filter: drop-shadow(2px 2px 2px rgba(57,57,57,0.5));
+    filter: drop-shadow(2px 2px 2px rgba(57,57,57,0.5));
+}
+.accordion p {
+  font-size: 12px;
+}
+#tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  margin: 0;
+  color: white !important;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-align: center;
+  background-color: rgba(57,57,57,0.4);
+  opacity: 0;
+  pointer-events: none;
+  border-radius:5px;
+  transition: .2s;
+}
+#imgs {
+  margin:10px 20px 0 20px;
+}
+.imgInner {
+    text-align: center;
+    vertical-align: top;
+    display: inline-block;
+}
+#regionText{
+  margin: 0 20px 0 20px;
+}
+#imgs img {
+    margin:10px;
+    width:40px;
+    -webkit-filter: drop-shadow(2px 2px 2px rgba(57,57,57,0.5));
+    filter: drop-shadow(2px 2px 2px rgba(57,57,57,0.5));
+}
+#imgs p {
         color: white;
         position: relative;
-        margin-left:40px;
-        bottom:20px;
+        left:15px;
+        bottom:30px;
     }
-    #noResources {
-        color: rgba(57,57,57,1) !important;
-        margin-left:0 !important;
-        margin-top:50px;
-    }
-    #rflDescription img {
-        width: 50px;
-        -webkit-filter: drop-shadow(2px 2px 2px rgba(57,57,57,0.5));
-        filter: drop-shadow(2px 2px 2px rgba(57,57,57,0.5));
-    }
-    #rflDescription .card {
-        border-color: rgba(0,0,0,0)
-    }
-    #rflDescription .card-divider {
-        background-color: rgba(0,0,0,0);
-        text-align: center;
-        border-bottom: solid rgba(57,57,57,.4);
-        border-bottom-width: 2px;
-    }
-    .region {
+#noResources {
+  text-align: center;
+  margin:20px;
+}
+.region {
         stroke: #fff;
         stroke-width:1.3px;
     }
-    .activeState {
+.activeState {
         stroke: rgba(57,57,57,1);
         stroke-width:2px;
     }
-    .svg-container {
-        margin:auto;
-        display: block;
-        position: relative;
-    }
-    
-    
+.svg-container {
+    margin:auto;
+    display: block;
+    position: relative;
+}
