@@ -103,8 +103,7 @@ function rflMap() {
                     .style("top", right  + "px")
             })
             .on("mouseout",function() {
-                d3.select(this).classed('activeState',false)
-                d3.select(this).attr('stroke','rgba(0,0,0,1)')
+                d3.select("path.activeState").classed('activeState',false)
                 Tooldiv.transition()
                     .duration(500)
                     .style("opacity",0)
