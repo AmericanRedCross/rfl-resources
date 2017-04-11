@@ -52,44 +52,45 @@ function rflMap() {
                 }
                 })
             .on("mouseover", function(d) {
+                console.log(this)
                 d3.select(this).classed('activeState',true)
                 this.parentElement.appendChild(this);
                 rcRegion = regionData["$"+d.properties.RCODE]
                 var region = rcRegion.Region
                 var imgs, regionHTML;
                 function filterPrograms() {
-                var programs = []
-                regionHTML = '<p id="regionText">' + region + '</p>'
-                // add to programs if region has them.
-                if(rcRegion.instructor > 0 ) {
-                    programs.push(
-                        '<div class="imgInner"><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div>'
-                    )
-                }
-                if(rcRegion.mentor > 0) {
-                    programs.push(
-                        '<div class="imgInner"><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div>'
-                    )
-                }
-                if(rcRegion.outreach > 0) {
-                    programs.push(
-                        '<div class="imgInner"><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div>'
-                    )
-                }
-                if(rcRegion.phone > 0) {
-                    programs.push(
-                        '<div class="imgInner"><img src="img/phoneProj.png"/></div>'
-                    )
-                }
-                // based on # of programs, set up cards.
-                if(programs.length > 0) {
-                    programs = programs.join('')
-                    imgs = '<div id="imgs">' + programs + '</div>'
-                    regionHTML += imgs
-                } else {
-                    imgs = '<div><p id="noResources">There are no resources in this region</p></div>'
-                    regionHTML += imgs
-                }
+                  var programs = []
+                  regionHTML = '<p id="regionText">' + region + '</p>'
+                  // add to programs if region has them.
+                  if(rcRegion.instructor > 0 ) {
+                      programs.push(
+                          '<div class="imgInner"><img src="img/instructorspng.png"/><p>' + rcRegion.instructor + '</p></div>'
+                      )
+                  }
+                  if(rcRegion.mentor > 0) {
+                      programs.push(
+                          '<div class="imgInner"><img src="img/mentor.png"/><p>' + rcRegion.mentor + '</p></div>'
+                      )
+                  }
+                  if(rcRegion.outreach > 0) {
+                      programs.push(
+                          '<div class="imgInner"><img src="img/grantProj.png"/><p>' + rcRegion.outreach + '</p></div>'
+                      )
+                  }
+                  if(rcRegion.phone > 0) {
+                      programs.push(
+                          '<div class="imgInner"><img src="img/phoneProj.png"/></div>'
+                      )
+                  }
+                  // based on # of programs, set up cards.
+                  if(programs.length > 0) {
+                      programs = programs.join('')
+                      imgs = '<div id="imgs">' + programs + '</div>'
+                      regionHTML += imgs
+                  } else {
+                      imgs = '<div><p id="noResources">There are no resources in this region</p></div>'
+                      regionHTML += imgs
+                  }
                 }
                 filterPrograms()
                 left = d3.event.pageX
@@ -100,10 +101,10 @@ function rflMap() {
                 Tooldiv.html(regionHTML)
                     .style("left", left + "px")
                     .style("top", right  + "px")
-                //d3.select('#info').html(regionHTML);
             })
             .on("mouseout",function() {
                 d3.select(this).classed('activeState',false)
+                d3.select(this).attr('stroke','rgba(0,0,0,1)')
                 Tooldiv.transition()
                     .duration(500)
                     .style("opacity",0)
