@@ -52,7 +52,6 @@ function rflMap() {
                 }
                 })
             .on("mouseover", function(d) {
-                console.log(this)
                 d3.select(this).classed('activeState',true)
                 this.parentElement.appendChild(this);
                 rcRegion = regionData["$"+d.properties.RCODE]
@@ -104,7 +103,7 @@ function rflMap() {
             })
             .on("mouseout",function() {
                 console.log(this)
-                d3.select(this).classed('activeState',true)
+                d3.select(this).classed('activeState',false)
                 Tooldiv.transition()
                     .duration(500)
                     .style("opacity",0)
